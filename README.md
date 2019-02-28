@@ -6,8 +6,10 @@
 - Saved articles can be viewed in the "Saved Articles" page.
 - Comments on saved articles can be added by clicking the "Add a Note" button.
 - Saved articles can be deleted by clicking the "Delete" button.
+**Try out the Application here!**
 
-**Check out the App**
+<img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongo.Scraper1.png" alt Home Page>
+<img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongo.Scraper.png" alt Saved Articles>
 
 ## Technologies Used
 * Node.js
@@ -15,7 +17,7 @@
 * Handlebars.js
 * MongoDB
 * Mongoose
-* *npm packages:*
+**npm packages:**
 * body-parser
 * express
 * express-handlebars
