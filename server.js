@@ -111,6 +111,7 @@ app.get("/scrape", function(req, res) {
             result.title = $(this).find("div.story-headline").find("h3").text();
             result.summary = $(this).find("p").text();
             result.link = $(this).find("div.story-headline").find("h3").children("a").attr("href");
+            result.image = $(this).find(".story-image").find("img").attr("data-hi-res-src");
 
             if(result.title && result.link && result.summary) {
                 // Using our Article model, create a new entry

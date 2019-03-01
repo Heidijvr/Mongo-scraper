@@ -22,6 +22,9 @@ var ArticleSchema = new Schema({
     type: Boolean,
     default: false
   },
+  image: {
+    type: String
+  },
   notes: [{
      type: Schema.Types.ObjectId,
      ref: "Note"
