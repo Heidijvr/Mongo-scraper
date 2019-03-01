@@ -68,7 +68,6 @@ app.get("/", function(req, res) {
     var hbsObject = {
       article: data
     };
-    console.log(hbsObject);
     res.render("home", hbsObject);
   });
 });
@@ -91,47 +90,53 @@ mongoose.connect(MONGODB_URI);
 
 // A GET request to scrape the Washington Post - Lifestyle website
 app.get("/scrape", function(req, res) {
-    // First, we grab the body of the html with axios
 
+    // First, we grab the body of the html with axios
+    console.log("here we are");
     // db.Article.deleteMany({saved : false}).then(function() {
     //     console.log("deleted articles");
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     axios.get("https://www.washingtonpost.com/lifestyle/").then(function(response) {
         var $ = cheerio.load(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
-        $("article h2").each(function(i, element) {
-        // Save an empty result object
-        var result = {};
+        console.log("Page loaded");
+        // Now, we grab every h2 within an article tag, and do the following:
+        $("div.story-list-story").each(function(i, element) {
+            // Save an empty result object
+            var result = {};
+            console.log("Article found")
 
-         // Add the title and summary of every link, and save them as properties of the result object
-      result.title = $(this).children("h2").text();
-      result.summary = $(this).children(".summary").text();
-      result.link = $(this).children("h2").children("a").attr("href");
+            // Add the title and summary of every link, and save them as properties of the result object
+            result.title = $(this).find("div.story-headline").find("h3").text();
+            result.summary = $(this).find("p").text();
+            result.link = $(this).find("div.story-headline").find("h3").children("a").attr("href");
 
-      // Using our Article model, create a new entry
-      // This effectively passes the result object to the entry (and the title and link)
-      var entry = new Article(result);
+            if(result.title) {
+                // Using our Article model, create a new entry
+                // This effectively passes the result object to the entry (and the title and link)
+                var entry = new Article(result);
 
 
 
- // Now, save that entry to the db
- entry.save(function(err, doc) {
-    // Log any errors
-    if (err) {
-      console.log(err);
-    }
-    // Or log the doc
-    else {
-      console.log(doc);
-    }
-  });
+                // Now, save that entry to the db
+                entry.save(function(err, doc) {
+                    // Log any errors
+                    if (err) {
+                        console.log(err);
+                    }
+                    // Or log the doc
+                    else {
+                        console.log(doc);
+                    }
+                });
+            } else {
+                console.log("No title found. Skipping");
+            }
 
-});
-    res.send("Scrape Complete");
+        });
 
-});
-// Tell the browser that we finished scraping the text
+        res.send("Done");
+    });
 });
 
 // This will get the articles we scraped from the mongoDB
