@@ -2,7 +2,7 @@
 <div class="container">
     <div class="jumbotron">
         <div class="text-center">
-            <h1>Washington Post - Lifestyle</h1>
+            <h1><strong>Washington Post - Lifestyle</strong></h1>
             <h2>Mongo Scraper</h2>
         </div>
 
@@ -12,11 +12,12 @@
             {{#each article}}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>{{this.title}}</h4>
+                    <a href={{this.link}} target="_blank">
+                        <h4>{{this.title}}</h4>
+                    </a>
                 </div>
                 <div class="panel-body">
                     <p> {{this.summary}}</p>
-                    <a href={{this.link}} target="_blank">{{this.link}}</a>
                     <br><br>
                     <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
                 </div>
