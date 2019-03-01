@@ -6,6 +6,7 @@
 - Saved articles can be viewed in the "Saved Articles" page.
 - Comments on saved articles can be added by clicking the "Add a Note" button.
 - Saved articles can be deleted by clicking the "Delete" button.
+
 **Try out the Application here!**
 
 <img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongo.Scraper1.png" alt Home Page>
