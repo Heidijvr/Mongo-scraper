@@ -23,7 +23,7 @@ var cheerio = require("cheerio");
 mongoose.Promise = Promise;
 
 //Define port
-var port = process.env.PORT || 2000
+var PORT = process.env.PORT || 2000
 
 // Initialize Express
 var app = express();
@@ -46,9 +46,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-// Database configuration with mongoose
-mongoose.connect("mongodb://heroku_44trk6l9:sbk87ko51fas6ukedv04plr1qe@ds255005.mlab.com:55005/heroku_44trk6l9");
-//mongoose.connect("mongodb://localhost/mongoscraper");
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -151,20 +149,6 @@ else {
 });
 });
 
-    // // Route for getting all Articles from the db
-    // app.get("/articles", function(req, res) {
-    //     // Grab every document in the Articles collection
-    // db.Article.find({})
-    // .then(function(dbArticle) {
-    //     // If we were able to successfully find Articles, send them back to the client
-    //     res.json(dbArticle);
-    // })
-    // .catch(function(err) {
-    //     // If an error occurred, send it to the client
-    //     res.json(err);
-    // });
-    // });
-
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
@@ -183,16 +167,6 @@ app.get("/articles/:id", function(req, res) {
         }
     });
     });
-
-//       .then(function(dbArticle) {
-//         // If we were able to successfully find an Article with the given id, send it back to the client
-//         res.json(dbArticle);
-//       })
-//       .catch(function(err) {
-//         // If an error occurred, send it to the client
-//         res.json(err);
-//       });
-//   });
 
 // Save an article
 app.post("/articles/save/:id", function(req, res) {
@@ -291,7 +265,7 @@ Note.findOneAndRemove({ "_id": req.params.note_id }, function(err) {
 });
 
 // Start the server
-app.listen(port, function() {
-  console.log("App running on port " + port + "!");
+app.listen(PORT, function() {
+  console.log("App running on port " + PORT + "!");
 });
 
