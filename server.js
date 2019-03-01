@@ -90,13 +90,15 @@ mongoose.connect(MONGODB_URI);
 
 // A GET request to scrape the Washington Post - Lifestyle website
 app.get("/scrape", function(req, res) {
+  
+    // Delete existing unsaved articles from the db
+    Article.deleteMany({saved : false}).then(function() {
+         console.log("deleted articles");
+    });
 
-    // First, we grab the body of the html with axios
-    console.log("here we are");
-    // db.Article.deleteMany({saved : false}).then(function() {
-    //     console.log("deleted articles");
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    // Get the page using axios
     axios.get("https://www.washingtonpost.com/lifestyle/").then(function(response) {
+        
         var $ = cheerio.load(response.data);
 
         console.log("Page loaded");
@@ -104,14 +106,13 @@ app.get("/scrape", function(req, res) {
         $("div.story-list-story").each(function(i, element) {
             // Save an empty result object
             var result = {};
-            console.log("Article found")
 
             // Add the title and summary of every link, and save them as properties of the result object
             result.title = $(this).find("div.story-headline").find("h3").text();
             result.summary = $(this).find("p").text();
             result.link = $(this).find("div.story-headline").find("h3").children("a").attr("href");
 
-            if(result.title) {
+            if(result.title && result.link && result.summary) {
                 // Using our Article model, create a new entry
                 // This effectively passes the result object to the entry (and the title and link)
                 var entry = new Article(result);
@@ -130,12 +131,12 @@ app.get("/scrape", function(req, res) {
                     }
                 });
             } else {
-                console.log("No title found. Skipping");
+                console.log("No title & link found. Skipping");
             }
 
         });
 
-        res.send("Done");
+        res.redirect("/");
     });
 });
 
