@@ -17,6 +17,7 @@
 * Handlebars.js
 * MongoDB
 * Mongoose
+
 **npm packages:**
 * body-parser
 * express
