@@ -9,7 +9,7 @@
 
 **Try out the Application here!**
 
-<img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongoScraper.png" alt Home Page>
+<img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongoscraper2.png" alt Home Page>
 <img src="https://github.com/Heidijvr/Mongo-scraper/blob/master/public/assets/img/mongoScraper1.png" alt Saved Articles>
 
 ## Technologies Used
