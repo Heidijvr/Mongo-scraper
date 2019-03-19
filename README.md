@@ -27,3 +27,5 @@
 * cheerio
 * request
 * axios
+---
+This assignment is in fulfillment of the requirements for the bootcamp of the University of Washington (September 2018 - April 2019)
